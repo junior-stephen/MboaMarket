@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mboa Market</title>
 
+    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+
     <!--GESTION DU CSS-->
-    <link rel="stylesheet" href="./css/style.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <!--ENTETE DE LA PAGE-->
@@ -16,29 +18,48 @@
                 <a href="#">Mboa <span>Market</span></a>     
             </div>
             <div id="menu">
-                <a href="#" id="btn-panier" 
-                Panier <span><i class=""></i></span>
+                <a href="#" id="btn_panier">
+                    Panier <span><i class="fa-solid fa-cart-shopping"></i></span>
+                </a> 
             </div>
-        </div>
+        </div>   
     </header>
 
     <!--Conteneur de la page-->
-    <main id="conteneur">
-        
+    <main id="container">
+
         <!--SECTION CARROUSEL-->
         <section id="carroussel">
-            <div class="slide" style="background-image: url('images/');">
-
-                <div class="slide_text">
-                    <h2>Titre 1</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis fugiat, tenetur asperiores nulla iusto dicta doloribus illo ratione in, delectus quaerat quae commodi id maiores recusandae sint, labore repudiandae repellendus!
-                    </p>
-                    <div class="buttons">
-                        <a href="#"> En savoir plus.</a>
+            <div class="slide" style="background-image: url('images/slide1.png');">
+                <div class="slide_container">
+                    <div class="slide_text">
+                        <h2>Titre 1</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis 
+                            fugiat, tenetur asperiores nulla iusto dicta doloribus illo ratione
+                            in, delectus quaerat quae commodi id maiores recusandae sint, labore 
+                            repudiandae repellendus!
+                        </p>
+                        <div class="buttons">
+                            <a href="#"> En savoir plus</a>
+                        </div>
                     </div>
                 </div>
             </div>
+
+<!--BOUTONS D'OPTIONS DES SLIDES-->
+            <div class="slide_options">
+                <span class="slide_left">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </span>
+                <span class="slide_right">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </span>
+            </div>
+
+
+
+
         </section>
     </main>
 
