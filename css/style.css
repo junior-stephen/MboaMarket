@@ -1,18 +1,22 @@
 /*
 ======================
 DECLARATION DES VARIABLES CSS
-=====================
+======================
 */
 
+/* :root = la racine du document, les variables y sont accessibles partout via var(--nom) */
 :root {
     --main-color: #e9a23b;
     --seccond-color: #1f4d3a;
-    --third-color:#c2562b;
+    --third-color: #c2562b;
     --or-color: #e9a23b;
+    --white-color: white;
     --success-color: darkgreen;
-    --warning-color:darkorange;
-    --danger-color:darkred;
-    --slide-bgcolor:rgba(0, 0, 0, 0.45);
+    --warning-color: darkorange;
+    --danger-color: darkred;
+    /* rgba(rouge, vert, bleu, opacité) : noir à 45 % d'opacité */
+    --slide-bgcolor: rgba(0, 0, 0, 0.45);
+    /* liste de polices : le navigateur prend la première disponible */
     --main-font: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
     --tittle-font: forte, arial, sans-serif;
     --font-size: 12pt;
@@ -24,6 +28,8 @@ DECLARATION DES VARIABLES CSS
 DECLARATION DES ANIMATIONS
 ======================
 */
+
+/* Apparition progressive : de invisible (0) à visible (1) */
 @keyframes fondu {
     from {
         opacity: 0;
@@ -33,10 +39,11 @@ DECLARATION DES ANIMATIONS
     }
 }
 
-@keyframes comingleft{
+/* Arrivée par la gauche : l'élément glisse de 70px vers sa place tout en apparaissant */
+@keyframes comingleft {
     from {
         opacity: 0;
-        transform: translateX(-70px);
+        transform: translateX(-70px); /* décalage horizontal vers la gauche */
     }
     to {
         opacity: 1;
@@ -45,60 +52,80 @@ DECLARATION DES ANIMATIONS
 }
 
 
-
 /*
 ======================
 DESIGN GLOBAL
-=====================
+======================
 */
 
-*{
-margin :0px;
-padding: 0px;
-box-sizing: border-box;
+/* Remet à zéro les marges par défaut du navigateur */
+* {
+    margin: 0px;
+    padding: 0px;
+    /* la largeur inclut le padding et la bordure (plus facile pour calculer les tailles) */
+    box-sizing: border-box;
 }
 
-body{
-    min-height: 100vh;
+body {
+    min-height: 100vh; /* 100vh = 100 % de la hauteur de l'écran */
     width: auto;
     font-family: var(--main-font);
     font-size: var(--font-size);
 }
 
-/* pour masquer les elements */
-.hide{
+/* Pour masquer les éléments */
+.hide {
+    /* !important : cette règle l'emporte sur toutes les autres règles de display */
     display: none !important;
 }
 
+/* Couleurs de texte */
 .success {
     color: var(--success-color) !important;
 }
 
-.warning{
-    color: var(--warning-color) ! important;
+.warning {
+    color: var(--warning-color) !important;
 }
 
-.danger{
+.danger {
     color: var(--danger-color) !important;
 }
 
+/* Couleurs de fond */
 .bg-success {
     background-color: var(--success-color) !important;
 }
 
-.warning{
-    background-color: var(--warning-color) ! important;
+.bg-warning {
+    background-color: var(--warning-color) !important;
 }
 
-.danger{
+.bg-danger {
     background-color: var(--danger-color) !important;
 }
 
+/* Liens : pas de soulignement, même style après avoir été visités */
 a, a:visited {
     text-decoration: none;
+    /* inline-block : reste sur la ligne mais accepte padding, marges et dimensions */
     display: inline-block;
-    cursor: pointer;
+    cursor: pointer; /* affiche la main au survol */
 }
+
+/* Cache tout ce qui dépasse du conteneur */
+.overflow {
+    overflow: hidden;
+}
+
+/* Bouton de fermeture */
+.close {
+    font-size: 14pt;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--danger-color);
+}
+
 
 /*
 ======================
@@ -106,24 +133,27 @@ DESIGN ENTETE
 ======================
 */
 
-
-#entete{
+#entete {
+    /* fixed : l'entête reste collé en haut même quand on fait défiler la page */
     position: fixed;
     top: 0px;
     left: 0px;
     width: 100%;
-    padding: 20px 40px;
-    z-index: 1000; 
+    padding: 20px 40px; /* 20px haut/bas, 40px gauche/droite */
+    /* z-index : ordre d'empilement, 1000 place l'entête au-dessus des autres éléments */
+    z-index: 1000;
+    /* transition : les changements (couleur, padding...) se font en 0.5s en douceur */
+    transition: all 0.5s ease-in-out;
 }
 
-#entete .container{
+#entete .container {
     width: 100%;
     height: auto;
+    /* flex : aligne le logo et le menu sur la même ligne */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; /* logo à gauche, menu à droite */
+    align-items: center; /* centrage vertical */
 }
-
 
 #entete a {
     color: var(--seccond-color);
@@ -138,17 +168,61 @@ DESIGN ENTETE
     color: var(--main-color);
 }
 
-#btn_panier{
+#btn_panier {
     padding: 10px 20px;
     border: 2px solid var(--white-color);
-    border-radius: 30px;
+    border-radius: 30px; /* bords très arrondis (forme de bouton) */
 }
 
+/* :hover = quand la souris est sur l'élément */
 #btn_panier:hover {
     background-color: var(--main-color);
-    border-color:var(--main-color);
+    border-color: var(--main-color);
     transition: all 0.5s ease-in-out;
 }
+
+/* Pastille indiquant le nombre d'articles dans le panier */
+#nb_articles {
+    display: inline-block;
+    min-width: 22px; /* garde une pastille ronde même avec un seul chiffre */
+    padding: 1px 6px;
+    margin-left: 4px;
+    text-align: center;
+    font-size: 8pt;
+    font-weight: bold;
+    color: var(--white-color);
+    background-color: var(--third-color);
+    border-radius: 20px;
+}
+
+
+/*
+======================
+COULEUR DE FOND DE L'ENTETE
+======================
+*/
+
+/* Style appliqué à l'entête quand la classe "entete_fond" est ajoutée (au défilement) */
+#entete.entete_fond {
+    background-color: var(--white-color);
+    /* box-shadow : décalage X, décalage Y, flou, couleur de l'ombre */
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 12px 40px; /* entête plus fin une fois le fond affiché */
+}
+
+#entete.entete_fond a {
+    color: var(--seccond-color);
+}
+
+#entete.entete_fond #btn_panier {
+    border-color: var(--seccond-color);
+}
+
+#entete.entete_fond #btn_panier:hover {
+    color: var(--white-color);
+    border-color: var(--main-color);
+}
+
 
 /*
 ======================
@@ -156,48 +230,50 @@ DESIGN CARROUSSEL
 ======================
 */
 
-#carroussel{
+#carroussel {
     width: 100%;
-    height: 100vh;
+    height: 100vh; /* le carrousel occupe tout l'écran */
+    /* relative : sert de point de repère pour les éléments en position absolute à l'intérieur */
     position: relative;
     overflow: hidden;
 }
 
-#carroussel .slide{
+#carroussel .slide {
+    /* absolute : tous les slides sont superposés au même endroit dans le carrousel */
     position: absolute;
     top: 0px;
     left: 0px;
     width: 100%;
     height: 100%;
-    background-position: center;
-    background-size: cover;
-    animation: fondu is ease-in-out;
+    background-position: center; /* image centrée */
+    background-size: cover; /* l'image remplit tout le slide, quitte à être rognée */
+    animation: fondu 0.8s ease-in-out;
 }
 
 #carroussel .slide_container {
     width: 100%;
     height: 100%;
-    padding: 0px 8%;
+    padding: 0px 8%; /* marges gauche/droite en pourcentage de la largeur */
     color: var(--white-color);
     display: flex;
-    justify-content: left;
-    align-items: center;
+    justify-content: left; /* texte aligné à gauche */
+    align-items: center; /* texte centré verticalement */
 }
 
-#carroussel .slide_text{
+#carroussel .slide_text {
     width: 50%;
-    min-width: 250px;
+    min-width: 250px; /* évite que le texte soit trop étroit sur petit écran */
     animation: comingleft 0.8s ease-in-out;
 }
 
-#carroussel .slide_text h2{
+#carroussel .slide_text h2 {
     font-size: 35pt;
-    line-height: 1,1;
+    line-height: 1.1; /* line-height : hauteur d'une ligne de texte */
 }
 
-#carroussel .slide_text p{
+#carroussel .slide_text p {
     font-size: 13pt;
-    margin: 20px 0px;
+    margin: 20px 0px; /* espace de 20px au-dessus et en dessous */
 }
 
 #carroussel .slide_text .buttons a {
@@ -208,34 +284,139 @@ DESIGN CARROUSSEL
     font-weight: bold;
 }
 
-#carroussel .slide_text .buttons a:hover{
+#carroussel .slide_text .buttons a:hover {
     background-color: var(--seccond-color);
     transition: all 0.5s ease-in-out;
 }
 
-#carroussel .slide_options{
+/* Flèches gauche/droite du carrousel */
+#carroussel .slide_options {
     position: absolute;
-    left: 90px;
+    left: 100px;
     bottom: 10px;
-    z-index: 200;
+    z-index: 200; /* reste au-dessus des slides */
 }
 
-#carroussel .slide_options span{
+#carroussel .slide_options span {
     display: inline-block;
     width: 50px;
     height: 50px;
+    /* line-height = height : centre l'icône verticalement dans le cercle */
     line-height: 50px;
     text-align: center;
     margin-right: 10px;
-    font-size: 1.2em;
+    font-size: 1.2em; /* em = relatif à la taille de police du parent */
     color: var(--white-color);
     border: 2px solid var(--white-color);
-    border-radius: 50%;
+    border-radius: 50%; /* 50 % = cercle parfait */
     cursor: pointer;
 }
 
-#carroussel .slide_options span:hover{
+#carroussel .slide_options span:hover {
     background-color: var(--main-color);
     border-color: var(--main-color);
-    transition: all 0.5 ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+
+/*
+======================
+DESIGN BOUTIQUE
+======================
+*/
+
+#boutique {
+    padding: 70px 8%;
+    background-color: var(--white-color);
+    /* scroll-margin-top : garde 70px de marge en haut quand on arrive sur la section par un lien,
+       pour qu'elle ne soit pas cachée sous l'entête fixe */
+    scroll-margin-top: 70px;
+}
+
+#boutique .boutique_entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* passe à la ligne si pas assez de place */
+    gap: 10px; /* espace entre les éléments du flex */
+}
+
+#boutique .boutique_entete h2 {
+    font-size: 26pt;
+    color: var(--seccond-color);
+}
+
+#boutique .boutique_entete #nb_resultats {
+    color: var(--seccond-color);
+}
+
+#boutique .boutique_outils {
+    display: flex;
+    gap: 15px;
+    margin: 25px 0px 15px; /* haut 25px, côtés 0px, bas 15px */
+}
+
+/* Barre de recherche */
+#boutique .recherche {
+    flex: 1; /* prend toute la place restante à côté du select */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0px 20px;
+    background-color: var(--white-color);
+    border: 1px solid var(--seccond-color);
+    border-radius: 30px;
+}
+
+#boutique .recherche input {
+    flex: 1;
+    padding: 14px 0px;
+    border: none;
+    outline: none; /* supprime le contour affiché quand on clique dans l'input */
+    font-size: var(--font-size);
+    background: none; /* l'input prend le fond de la barre */
+}
+
+/* Liste de tri */
+#boutique select {
+    padding: 0px 20px;
+    border: 1px solid var(--seccond-color);
+    border-radius: 30px;
+    font-size: var(--font-size);
+    background-color: var(--white-color);
+    cursor: pointer;
+}
+
+/* Boutons de catégories */
+#categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+#categories .categorie {
+    padding: 8px 20px; /* 8px haut/bas pour donner de la hauteur au bouton */
+    border: 1px solid var(--seccond-color);
+    background-color: var(--main-color);
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+/* Au survol ou quand la catégorie est sélectionnée (classe "actif") */
+#categories .categorie:hover,
+#categories .categorie.actif {
+    background-color: var(--seccond-color);
+    color: var(--white-color);
+    transition: all 0.4s ease-in-out;
+    border-color: var(--seccond-color);
+}
+
+/* Grille de produits */
+#produits {
+    display: grid;
+    /* auto-fit + minmax : autant de colonnes que possible, chacune d'au moins 220px,
+       et elles se partagent l'espace restant (1fr) */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
 }
